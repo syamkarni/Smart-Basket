@@ -2,11 +2,11 @@
   "version": 1,
   "builds": [
     {
-      "src": "Project-J/main.py",
+      "src": "main.py",
       "use": "@now/python"
     }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "Project-J/main.py" }
+    { "src": "/(.*)", "dest": "main.py" }
   ]
 }
