@@ -1,0 +1,42 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty.css') }}">
+  <div class="add-product-container">
+    <h2>Add Product</h2>
+    <form action="{{ url_for('add_product', category_id=category_id) }}" method="POST">
+      <input type="hidden" name="category_id" value="{{ category_id }}">
+
+      <div class="form-group">
+        <label for="product_name">Product Name:</label>
+        <input type="text" class="form-control" id="product_name" name="product_name" required>
+      </div>
+      <div class="form-group">
+        <label for="unit">Unit:</label>
+        <select class="form-control" id="unit" name="unit">
+          <option value="rs/kg">Rs/kg</option>
+          <option value="rs/litre">Rs/litre</option>
+          <option value="rs/dozen">Rs/dozen</option>
+          <option value="rs.gram">Rs/gram</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" required>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" id="price" name="price" required>
+      </div>
+      <div class="form-group">
+        <label for="manufacturing_date">Manufacturing Date:</label>
+        <input type="date" class="form-control" id="manufacturing_date" name="manufacturing_date" required>
+    </div>
+    <div class="form-group">
+        <label for="expiring_date">Expiring Date:</label>
+        <input type="date" class="form-control" id="expiring_date" name="expiring_date" required>
+    </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+{% endblock %}

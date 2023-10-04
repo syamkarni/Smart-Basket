@@ -1,0 +1,46 @@
+{% extends "user_base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h2>User Dashboard</h2>
+
+    <h3>Categories</h3>
+    <ul>
+      {% for category in categories %}
+        <li>
+          <h3>{{ category.category_name }}</h3>
+          <div class="products-container clearfix">
+            {% if category.products %}
+              {% for product in category.products %}
+                <div class="product-container">
+                  <h4>{{ product.product_name }}</h4>
+                  <p>Price: ₹{{ product.price }}</p>
+                  <p>Unit: {{ product.unit }}</p>
+                  <p>Quantity: {{ product.quantity }}</p>
+                  <p>Manufacturing Date: {{ product.manufacturing_date }}</p>
+                  <p>Expiring Date: {{ product.expiring_date }}</p>
+
+                  <form action="{{ url_for('add_to_cart') }}" method="post">
+                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                    {% if product.quantity > 0 %}
+                      <button class="btn btn-success" type="submit">Add to Cart</button>
+                    {% else %}
+                      <p class="text-danger">Out of Stock</p>
+                    {% endif %}
+                  </form>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p>No products available in this category.</p>
+            {% endif %}
+          </div>
+        </li>
+        <br>
+        <br>
+      {% endfor %}
+    </ul>
+  </div>
+
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty1.css') }}">
+{% endblock %}

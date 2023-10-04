@@ -1,0 +1,282 @@
+
+nav {
+    position: sticky;
+    top: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 40px;
+}
+
+
+.search-bar {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+
+.search-bar input[type="text"] {
+    margin-right: 10px;
+}
+
+
+.search-bar button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.options a {
+    color: #fff;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.options a:hover {
+    text-decoration: underline;
+}
+
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: sticky;
+    bottom: 0;
+}
+
+
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    width: 30%;
+}
+
+.product-container h4 {
+    margin-bottom: 10px;
+}
+
+.product-container p {
+    margin: 10px 0;
+}
+
+.product-container form {
+    margin-top: 10px;
+}
+
+.product-container form .btn-success {
+    padding: 10px 15px;
+}
+
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f0f0f0;
+}
+
+
+.grand-total {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+
+.buy-all-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buy-all-button:hover {
+    background-color: #0056b3;
+}
+
+
+#profile {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#profile h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#profile p {
+    font-size: 16px;
+    color: #555;
+}
+
+#profile a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-top: 20px;
+}
+
+#profile a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+
+#edit-profile {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#edit-profile h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#edit-profile form {
+    margin-bottom: 20px;
+}
+
+#edit-profile label {
+    font-size: 16px;
+    color: #555;
+}
+
+#edit-profile input,
+#edit-profile textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#edit-profile button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#edit-profile button:hover {
+    background-color: #0056b3;
+}
+
+#edit-profile a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#edit-profile a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+/* Add this to sty1.css */
+#search-results {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#search-results h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#search-results h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#search-results ul {
+    list-style: none;
+    padding: 0;
+}
+
+#search-results li {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+#search-results li p {
+    margin: 5px 0;
+}
+
+#search-results li ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#search-results li ul li {
+    margin-bottom: 10px;
+}
+
+#search-results li form {
+    display: inline-block;
+}

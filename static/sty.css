@@ -1,0 +1,234 @@
+
+.container {
+    margin: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+.plus-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 42px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #ffc107;
+    padding: 10px;
+    border-radius: 10%;
+}
+
+.plus-button:hover {
+    background-color: #e0a800;
+}
+
+h3 {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+.product-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+.product-container h4 {
+    margin: 0 0 10px;
+}
+
+.action-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background-color: #0056b3;
+}
+
+.buttons-container {
+    margin-top: 10px;
+    display: flex;
+}
+
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.add-product-container {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.add-product-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.add-product-container .form-group {
+    margin-bottom: 15px;
+}
+
+
+#edit-category-section {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+#edit-category-section h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#edit-category-section form {
+    margin-bottom: 20px;
+}
+
+#edit-category-section label {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#edit-category-section input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#edit-category-section button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#edit-category-section button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.product-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+}
+
+.product-container label {
+    margin-bottom: 5px;
+}
+
+.product-container input {
+    margin-bottom: 10px;
+}
+
+
+#add-category-section {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+#add-category-section h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#add-category-section form {
+    margin-bottom: 20px;
+}
+
+#add-category-section label {
+    display: block;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#add-category-section input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#add-category-section button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-category-section button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+#admin-summary-section {
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+#admin-summary-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#admin-summary-section h3 {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#admin-summary-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#admin-summary-section th, #admin-summary-section td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+#admin-summary-section th {
+    background-color: #f2f2f2;
+}
+

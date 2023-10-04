@@ -1,0 +1,43 @@
+{% extends "user_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty1.css') }}">
+  <div id="search-results">
+    <h2>Search Results</h2>
+
+    <h3>Results</h3>
+    <ul>
+      {% for result in results %}
+        <li>
+          {% if result.category_name %}
+            <p>Category: {{ result.category_name }}</p>
+            <h4>Products in this Category:</h4>
+            <ul>
+              {% for product in result.products %}
+                <li>
+                  <p>Product: {{ product.product_name }}</p>
+                  <p>Price: {{ product.price }}</p>
+                  <p>Unit: {{ product.unit }}</p>
+                  <p>Quantity: {{ product.quantity }}</p>
+                  <form action="/user/add_to_cart" method="post">
+                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                    <button class="btn btn-success" type="submit">Add to Cart</button>
+                  </form>
+                </li>
+              {% endfor %}
+            </ul>
+          {% elif result.product_name %}
+            <p>Product: {{ result.product_name }}</p>
+            <p>Price: {{ result.price }}</p>
+            <p>Unit: {{ result.unit }}</p>
+            <p>Quantity: {{ result.quantity }}</p>
+            <form action="/user/add_to_cart" method="post">
+              <input type="hidden" name="product_id" value="{{ result.product_id }}">
+              <button class="btn btn-success" type="submit">Add to Cart</button>
+            </form>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

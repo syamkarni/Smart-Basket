@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      text-align: center;
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 300px;
+      padding: 20px;
+    }
+
+    h1 {
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sign Up</h1>
+  <div class="container">
+    <form action="/signup" method="POST">
+      <div class="form-group">
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+      </div>
+
+      <div class="form-group">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+      </div>
+
+      <div class="form-group">
+        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Phone Number" required>
+      </div>
+
+      <div class="form-group">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" id="address" name="address" placeholder="Address" required>
+      </div>
+
+      <div class="form-group">
+        <select class="form-control" id="gender" name="gender" required>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+    </form>
+    <p class="mt-3">Already have an account? <a href="/login">Sign in</a></p>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
