@@ -1,0 +1,15 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty.css') }}">
+  <div id="add-category-section">
+    <h1>Add Category</h1>
+    <form action="{{ url_for('add_category') }}" method="POST">
+      <div class="form-group">
+        <label for="category_name">Category Name:</label>
+        <input type="text" class="form-control" id="category_name" name="category_name" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+{% endblock %}

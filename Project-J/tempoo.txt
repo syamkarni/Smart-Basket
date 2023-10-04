@@ -1,0 +1,389 @@
+@app.route('/user/cart', methods=['GET'])
+def user_cart():
+    # Check if the user is logged in by verifying the user_id in the session
+    user_id = session.get('user_id')
+    if user_id is None:
+        # If user is not logged in, redirect to the login page
+        return redirect('/login')
+
+    # Get the user's cart items from the database
+    cart_items = Cart_Items.query.filter_by(user_id=user_id).all()
+
+    # Calculate the grand total of all cart items
+    grand_total = sum(item.quantity * item.product.price for item in cart_items)
+
+    return render_template('cart.html', cart_items=cart_items, grand_total=grand_total)
+
+
+
+
+
+
+    #part 2
+    @app.route('/user/cart/<int:user_id>', methods=['GET'])
+def user_cart(user_id):
+    # Check if the user is logged in by verifying the user_id in the session
+    session_user_id = session.get('user_id')
+    if session_user_id is None:
+        # If user is not logged in, redirect to the login page
+        return redirect('/login')
+
+    # Check if the logged-in user matches the requested user_id
+    if session_user_id != user_id:
+        # If not, it's an unauthorized access, you can handle it as needed
+        return "Unauthorized access"
+
+    # Call the get_cart_items function to retrieve the user's cart items
+    cart_items, grand_total = get_cart_items(user_id)
+
+    return render_template('cart.html', cart_items=cart_items, grand_total=grand_total)
+
+# Define a separate function to retrieve the cart items and calculate the grand total
+def get_cart_items(user_id):
+    # Get the user based on the user_id
+    user = User.query.get(user_id)
+
+    # Check if the user exists
+    if user is None:
+        return None, None
+
+    # Get the user's cart items through the user-cart_items relationship
+    cart_items = Cart_Items.query.filter_by(user_id=user_id).all()
+
+    # Calculate the grand total of all cart items
+    grand_total = sum(item.quantity * item.product.price for item in cart_items)
+
+    return cart_items, grand_total
+
+
+
+
+
+
+
+part 3 for add to cart functioanlity:
+
+@app.route('/user/add_to_cart', methods=['POST'])
+def add_to_cart():
+    # Check if the user is logged in by verifying the user_id in the session
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('user_login'))
+
+    # Get the selected product_id from the form data
+    product_id = int(request.form['product_id'])
+
+    # Get the user's cart or create a new one if it doesn't exist
+    cart = Cart.query.filter_by(user_id=user_id).first()
+    if not cart:
+        cart = Cart(user_id=user_id, total_amount=0)
+        db.session.add(cart)
+        db.session.commit()
+
+    # Check if the product is already in the cart
+    cart_item = Cart_Items.query.filter_by(cart_id=cart.cart_id, product_id=product_id).first()
+
+    if cart_item:
+        # Increment the quantity of the existing product in the cart
+        cart_item.quantity += 1
+    else:
+        # Create a new cart item
+        cart_item = Cart_Items(cart_id=cart.cart_id, product_id=product_id, quantity=1)
+        db.session.add(cart_item)
+
+    # Update the total amount in the cart
+    # cart.total_amount = calculate_total_amount(cart.cart_id)
+    # db.session.commit()
+
+    # Redirect back to the user dashboard
+    return redirect(url_for('user_dashboard'))
+
+
+
+
+   <form action="{{ url_for('add_to_cart') }}" method="post">
+                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                    {% if product.quantity > 0 %}
+                      <button class="btn btn-success" type="submit">Add to Cart</button>
+                    {% else %}
+                      <p class="text-danger">Out of Stock</p>
+                    {% endif %}
+                  </form> 
+
+   # Get the selected product_id from the form data
+    product_id = int(request.form['product_id'])
+
+    <button class="btn btn-success" onclick="window.location.href='/user/add_to_cart/1'">Add to Cart</button>
+
+
+
+
+
+
+@app.route('/user/add_to_cart', methods=['POST'])
+def add_to_cart():
+    # Check if the user is logged in by verifying the user_id in the session
+    user_id = session.get('user_id')
+    if user_id is None:
+        return redirect(url_for('user_login'))
+
+    # Get the selected product_id from the form data
+    product_id = int(request.form['product_id'])
+
+    # Get the user's cart or create a new one if it doesn't exist
+    cart = Cart.query.filter_by(user_id=user_id).first()
+    if not cart:
+        cart = Cart(user_id=user_id, total_amount=0)
+        db.session.add(cart)
+
+    # Check if the product is already in the cart
+    cart_item = Cart_Items.query.filter_by(cart_id=cart.cart_id, product_id=product_id).first()
+
+    if cart_item:
+        # Increment the quantity of the existing product in the cart
+        cart_item.quantity += 1
+    else:
+        # Create a new cart item
+        cart_item = Cart_Items(cart_id=cart.cart_id, product_id=product_id, quantity=1, user_id=user_id)
+        db.session.add(cart_item)
+
+    # Commit changes to the database
+    db.session.commit()
+
+    # Redirect back to the user dashboard
+    return redirect(url_for('user_dashboard'))
+
+
+
+
+
+@app.route('/user/cart/<int:user_id>', methods=['GET'])
+def user_cart(user_id):
+    # Check if the user is logged in by verifying the user_id in the session
+    logged_in_user_id = session.get('user_id')
+    if logged_in_user_id is None or logged_in_user_id != user_id:
+        # If the logged-in user doesn't match the requested user_id, redirect to the login page
+        return redirect('/login')
+
+    # Get the user's cart items from the database
+    cart_items = db.session.query(Cart_Items).filter_by(user_id=user_id).all()
+
+    # Calculate the grand total of all cart items
+    grand_total = sum(item.quantity * item.product.price for item in cart_items)
+
+    return render_template('cart.html', cart_items=cart_items, grand_total=grand_total)
+
+
+
+working but without product references:
+
+@app.route('/user/cart/<int:user_id>', methods=['GET'])
+def user_cart(user_id):
+    # Check if the user is logged in by verifying the user_id in the session
+    logged_in_user_id = session.get('user_id')
+    if logged_in_user_id is None or logged_in_user_id != user_id:
+        # If the logged-in user doesn't match the requested user_id, redirect to the login page
+        return redirect('/login')
+    cart = Cart.query.filter_by(user_id=user_id).first()
+
+    if cart is not None:
+        # Get the cart items associated with the cart_id
+        cart_items = Cart_Items.query.filter_by(cart_id=cart.cart_id).all()
+
+        # Calculate the grand total of all cart items
+        grand_total = sum(item.quantity * item.product.price for item in cart_items)
+    else:
+        # If the user doesn't have a cart yet, set cart_items and grand_total to empty values
+        cart_items = []
+        grand_total = 0
+
+    return render_template('cart.html', cart_items=cart_items, grand_total=grand_total)
+
+cart.html:
+{% extends "user_base.html" %}
+
+{% block content %}
+  <div class="container">
+    <h2>Cart</h2>
+
+    {% if cart_items %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th> 
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cart_item in cart_items %}
+            <tr>
+              <td>{{ cart_item.product_name }}</td>
+              <td>{{ cart_item.quantity }}</td>
+              <td>${{ cart_item.price }}</td>
+              <td>${{ cart_item.quantity * cart_item.price }}</td>
+              <td><a href="/remove_from_cart?cart_item_id={{ cart_item.cart_item_id }}">Remove</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="grand-total">
+        <h4>Grand Total: ${{ grand_total }}</h4> <!-- Replace {{ grand_total }} with the actual calculated grand total from your backend -->
+        <button class="buy-all-button">Buy All</button>
+      </div>
+    {% else %}
+      <p>Your cart is empty.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
+
+
+
+for cart_item in cart_items:
+        product = Product.query.get(cart_item.product_id)
+        category = Category.query.get(product.category_id)
+
+        if product and category:
+            if product.quantity >= cart_item.quantity:
+                product.quantity -= cart_item.quantity
+                product.total_items_sold += cart_item.quantity
+                product.total_revenue += cart_item.quantity*product.price
+
+                category.total_items_sold += cart_item.quantity
+                category.total_revenue += cart_item.quantity*product.price
+
+                # Remove the cart item after processing
+                db.session.delete(cart_item)
+            else:
+                return "Not enough quantity available for some products in your cart."
+
+    # Commit changes to the database
+    db.session.commit()
+
+
+@app.route('/user/cart/<int:user_id>', methods=['GET'])
+def user_cart(user_id):
+    # Check if the user is logged in by verifying the user_id in the session
+    logged_in_user_id = session.get('user_id')
+    if logged_in_user_id is None or logged_in_user_id != user_id:
+        # If the logged-in user doesn't match the requested user_id, redirect to the login page
+        return redirect('/login')
+    
+    cart = Cart.query.filter_by(user_id=user_id).first()
+
+    # Get the user's cart items from the database
+    cart_items = Cart_Items.query.filter_by(cart_id=cart.cart_id).all()
+
+    # Create an empty list to store product information
+    cart_items_with_product_info = []
+
+    # Calculate the grand total of all cart items
+    grand_total = 0
+
+    for cart_item in cart_items:
+        # Fetch product information for each cart item
+        product = Product.query.filter_by(product_id=cart_item.product_id).first()
+
+        if product:
+            # Calculate the total for this cart item
+            total = cart_item.quantity * product.price
+            grand_total += total
+
+            # Create a dictionary with cart item details and product information
+            cart_item_info = {
+                'cart_item_id': cart_item.cart_item_id,
+                'product_name': product.product_name,
+                'quantity': cart_item.quantity,
+                'price': product.price,
+                'total': total,
+            }
+
+            # Add this dictionary to the list
+            cart_items_with_product_info.append(cart_item_info)
+
+    return render_template('cart.html', cart_items=cart_items_with_product_info, grand_total=grand_total)
+
+    @app.route('/user/checkout', methods=['POST'])
+def user_checkout(cart_id):
+    print('checkout is being processed....')
+    # Get the user's cart
+    user_id = session.get('user_id')
+    cart = Cart.query.filter_by(user_id=user_id, cart_id=cart_id).first()
+
+    # Check if the user has any items in the cart
+    if not cart:
+        return "Your cart is empty."
+
+    # Get the cart items associated with the cart
+    cart_items = Cart_Items.query.filter_by(cart_id=cart.cart_id).all()
+
+    # Process the purchase and update statistics
+    for cart_item in cart_items:
+        product = Product.query.get(cart_item.product_id)
+        category = Category.query.get(product.category_id)
+
+        if product and category:
+            if product.quantity >= cart_item.quantity:
+                product.quantity -= cart_item.quantity
+                product.total_items_sold += cart_item.quantity
+                product.total_revenue += cart_item.quantity * product.price
+
+                category.total_items_sold += cart_item.quantity
+                category.total_revenue += cart_item.quantity * product.price
+
+                # Remove the cart item after processing
+                db.session.delete(cart_item)
+            else:
+                return "Not enough quantity available for some products in your cart."
+
+    # Commit changes to the database
+    db.session.commit()
+
+    # Redirect the user to a confirmation or thank you page
+    return redirect(url_for('user_dashboard'))
+
+
+
+
+    # Route for editing category name
+@app.route('/admin/edit_category/<int:category_id>', methods=['GET', 'POST'])
+def edit_category(category_id):
+    # Retrieve the category from the database based on category_id
+    category = Category.query.get(category_id)
+
+    if request.method == 'POST':
+        new_category_name = request.form.get('new_category_name')
+    
+    # Check if new_category_name is not None or empty before updating
+    if new_category_name:
+        category.category_name = new_category_name
+        db.session.commit()
+        flash('Category name updated successfully', 'success')
+        return redirect(url_for('admin_dashboard'))
+    else:
+        flash('Category name cannot be empty', 'danger')
+
+    # Render the edit_category.html template with the category information
+    return render_template('edit_category.html', category=category)
+
+
+
+
+    {% extends "admin_base.html" %}
+
+{% block content %}
+    <h1>Edit Category</h1>
+
+    <form method="POST">
+        <label for="new_category_name">Category Name:</label>
+        <input type="text" id="new_category_name" name="new_category_name" value="{{ category.category_name }}" required>
+        <button type="submit">Save Changes</button>
+    </form>
+    
+    
+{% endblock %}
+

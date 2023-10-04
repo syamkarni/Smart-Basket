@@ -1,0 +1,43 @@
+{% extends "user_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty1.css') }}">
+  <div class="container">
+    <h2>Cart</h2>
+
+    {% if cart_items %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th> 
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cart_item in cart_items %}
+            <tr>
+              <td>{{ cart_item.product_name }}</td>
+              <td>{{ cart_item.quantity }}</td>
+              <td>₹{{ cart_item.price }}</td>
+              <td>₹{{ cart_item.total }}</td>
+              <td><a href="/remove_from_cart/{{ cart_item.cart_item_id }}">Remove</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="grand-total">
+        <h4>Grand Total: ₹{{ grand_total }}</h4> 
+        <form action="{{ url_for('user_checkout', cart_id=cart_items[0].cart_id) }}" method="post">
+    <button type="submit" class="buy-all-button">Buy All</button>
+</form>
+   
+      </div>
+    {% else %}
+      <p>Your cart is empty.</p>
+    {% endif %}
+  </div>
+{% endblock %}

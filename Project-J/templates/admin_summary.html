@@ -1,0 +1,51 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty.css') }}">
+<div id="admin-summary-section">
+<h2>Admin Statistics</h2>
+
+<h3>Category Statistics</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Total Items Sold</th>
+            <th>Total Revenue</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category_statistic in category_statistics %}
+            <tr>
+                <td>{{ category_statistic.category_name }}</td>
+                <td>{{ category_statistic.total_items_sold }}</td>
+                <td>${{ category_statistic.total_revenue }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Product Statistics</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Total Items Sold</th>
+            <th>Total Revenue</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product_statistic in product_statistics %}
+            <tr>
+                <td>{{ product_statistic.product_name }}</td>
+                <td>{{ product_statistic.total_items_sold }}</td>
+                <td>${{ product_statistic.total_revenue }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+{% endblock %}

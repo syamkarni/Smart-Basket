@@ -1,0 +1,17 @@
+{% extends "user_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty1.css') }}">
+    <div id="profile">
+    <h1>User Profile</h1>
+
+
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Phone Number:</strong> {{ user.phone }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+
+    <a href="/user/edit_profile">Edit Profile</a>
+
+    </div>
+{% endblock %}

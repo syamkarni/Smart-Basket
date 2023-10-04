@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Basket</title>
+    <link rel="icon" href="{{ url_for('static', filename='h.ico') }}"> 
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty1.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="logo">
+                <a class="navbar-brand" href="/user/dashboard"> 
+                    <img src="{{ url_for('static', filename='pnnn.png') }}" alt="Smart Basket Logo"> 
+                </a>
+            </div>
+            <div class="options">
+                <div class="search-bar">
+                    <form action="/user/search" method="GET">
+                        <input type="text" name="query" placeholder="Search for products">
+                        in
+                        <select name="search_type">
+                            <option value="category">Category</option>
+                            <option value="product">Product</option>
+                        </select>
+                        <button type="submit">Search</button>
+                    </form>
+                    
+                </div>
+                <a href="{{ url_for('user_cart', user_id=session['user_id']) }}">Cart</a> 
+                <a href="/user/profile">Profile</a> 
+                <a href="/user/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+
+        &copy; 2023 Smart Basket
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

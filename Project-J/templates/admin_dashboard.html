@@ -1,0 +1,52 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='sty.css') }}">
+
+  <div class="container">
+    <h2>Admin Dashboard</h2>
+
+
+    <a href="/admin/add_category" class="plus-button">+</a>
+
+    <h3>Categories</h3>
+    <ul>
+      {% for category in categories %}
+        <li>
+          <h3>{{ category.category_name }}</h3>
+          <div class="products-container">
+            {% if category.products %}
+              <div class="clearfix">
+                {% for product in category.products %}
+                  <div class="product-container" style="width: 20%; padding: 10px; float: left;">
+                    <h4>{{ product.product_name }}</h4>
+                    <p>Price: ₹{{ product.price }}</p>
+                    <p>Unit: {{ product.unit }}</p>
+                    <p>Quantity: {{ product.quantity }}</p>
+                    <p>Manufacturing Date: {{ product.manufacturing_date }}</p>
+                    <p>Expiring Date: {{ product.expiring_date }}</p>
+                    
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p>No products created.</p>
+            {% endif %}
+          </div>
+          <div class="buttons-container">
+            <button class="action-button" id="add-button" onclick="window.location.href='/admin/add_product/{{ category.category_id }}'">Add</button>
+        
+            <button class="action-button" id="edit-button" onclick="window.location.href='/admin/edit_category/{{ category.category_id }}'">Edit</button>
+        
+            <form action="{{ url_for('delete_category', category_id=category.category_id) }}" method="POST">
+                <button class="action-button" type="submit" id="delete-button">Delete</button>
+            </form>
+        </div>
+        
+        </li>
+        <br>
+        <br>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
