@@ -179,3 +179,6 @@ Contributions to Smart Basket are welcome! If you'd like to contribute, please f
 This project is licensed under the [MIT License](LICENSE).
 
 ---
+
+## Support my work 
+Do ⭐ the repository, if it inspired you, gave you ideas for your own portfolio or helped you in any way.
