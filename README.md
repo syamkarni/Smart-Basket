@@ -130,7 +130,6 @@ The Smart Basket application provides the following API endpoints:
 - Flask
 - Flask-SQLAlchemy
 - Flask-RESTful
-- SQLite
 - HTML
 - CSS
 - Jinja2
