@@ -180,5 +180,3 @@ This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-## Support my work 
-Do ⭐ the repository, if it inspired you, gave you ideas or helped you in any way.
